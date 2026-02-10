@@ -1,0 +1,198 @@
+/* ── LaserAway Dusty Rose AGS Theme ── */
+/* Warm, feminine, chic — matches the wallpaper */
+
+@define-color bg_bar       rgba(30, 30, 34, 0.35);
+@define-color bg_module    rgba(30, 30, 34, 0.4);
+@define-color bg_hover     rgba(196, 131, 139, 0.2);
+@define-color dusty_rose   #C4838B;
+@define-color mauve        #B06B72;
+@define-color blush        #D4A5A5;
+@define-color cream        #F2E6D9;
+@define-color gold         #C9A96E;
+@define-color text         #F5F0EB;
+@define-color text_dim     #D4A5A5;
+@define-color border_color rgba(196, 131, 139, 0.3);
+
+/* ── Bar Window ── */
+window.bar {
+    background: transparent;
+}
+
+window.bar > * {
+    background: @bg_bar;
+    border-radius: 14px;
+    border: 1px solid @border_color;
+    padding: 2px 8px;
+    color: @text;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+}
+
+/* ── Workspaces ── */
+.workspaces {
+    margin-left: 4px;
+}
+
+.workspace {
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 0 4px;
+    background: transparent;
+    color: @text_dim;
+    transition: all 200ms ease;
+}
+
+.workspace:hover {
+    background: rgba(196, 131, 139, 0.2);
+    color: @text;
+}
+
+.workspace.active {
+    background: rgba(196, 131, 139, 0.35);
+    color: @cream;
+    border: 1px solid @dusty_rose;
+    font-weight: bold;
+}
+
+/* ── Clock ── */
+.clock {
+    padding: 0 8px;
+}
+
+.clock-icon {
+    color: @dusty_rose;
+    margin-right: 6px;
+}
+
+.clock-time {
+    color: @cream;
+    font-weight: bold;
+}
+
+/* ── Modules (right side) ── */
+.module {
+    background: @bg_module;
+    border-radius: 10px;
+    padding: 0 12px;
+    margin: 3px 2px;
+}
+
+.module-icon {
+    color: @dusty_rose;
+    margin-right: 4px;
+}
+
+/* ── Volume ── */
+.volume {
+    color: @text;
+}
+
+/* ── Network ── */
+.network {
+    color: @text_dim;
+}
+
+/* ── Battery ── */
+.battery {
+    color: @text;
+}
+
+/* ── System Tray ── */
+.systray {
+    margin-right: 4px;
+}
+
+.tray-item {
+    background: transparent;
+    border-radius: 8px;
+    padding: 2px;
+    margin: 2px;
+}
+
+.tray-item:hover {
+    background: @bg_hover;
+}
+
+.tray-item image {
+    -gtk-icon-size: 16px;
+}
+
+/* ── Launcher Window ── */
+window.launcher {
+    background: transparent;
+}
+
+.launcher-box {
+    background: rgba(30, 30, 34, 0.55);
+    border: 1.5px solid @border_color;
+    border-radius: 16px;
+    min-width: 500px;
+    padding: 0;
+}
+
+/* ── Search ── */
+.launcher-search {
+    background: rgba(30, 30, 34, 0.4);
+    border-radius: 16px 16px 0 0;
+    padding: 14px 16px;
+}
+
+.search-icon {
+    color: @dusty_rose;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.search-entry {
+    background: transparent;
+    border: none;
+    color: @text;
+    font-size: 14px;
+    caret-color: @dusty_rose;
+    min-width: 400px;
+    outline: none;
+    box-shadow: none;
+}
+
+.search-entry:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* ── Results ── */
+.launcher-results {
+    padding: 8px 0;
+}
+
+.launcher-item {
+    padding: 10px 16px;
+    margin: 0 8px;
+    border-radius: 8px;
+    background: transparent;
+    transition: all 150ms ease;
+}
+
+.launcher-item:hover {
+    background: rgba(196, 131, 139, 0.15);
+}
+
+.launcher-item:focus {
+    background: @bg_module;
+}
+
+.launcher-item-icon {
+    margin-right: 12px;
+}
+
+.launcher-item-name {
+    color: @text;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.launcher-item-desc {
+    color: @text_dim;
+    font-size: 11px;
+}

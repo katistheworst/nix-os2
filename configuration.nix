@@ -56,7 +56,7 @@
 
   # ── SSH ───────────────────────────────────────────────────────────
   services.openssh.enable = true;
-
+  networking.firewall.allowedTCPPorts = [ 22 ]; 
   # ── Display Manager ───────────────────────────────────────────────
   # greetd is lightweight and works well with Hyprland
   services.greetd = {
@@ -75,8 +75,20 @@
   stylix = {
     enable = true;
     image = ./wallpaper.png;
-    # Let Stylix derive colors from the wallpaper automatically
     polarity = "light";
+
+    cursor = {
+      package = pkgs.callPackage ./cursors {};
+      name = "RoseHeartCursor";
+      size = 24;
+    };
+
+    opacity = {
+      applications = 0.92;
+      terminal = 0.65;
+      desktop = 0.85;
+      popups = 0.9;
+    };
 
     fonts = {
       monospace = {
@@ -133,7 +145,6 @@
     hypridle
 
     # Noctalia shell (from flake)
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # ── User ──────────────────────────────────────────────────────────
@@ -157,6 +168,13 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
   };
+
+  # ── Plymouth (boot splash) ──────────────────────────────────────
+  boot.plymouth = {
+    enable = true;
+    theme = "bgrt";
+  };
+  boot.initrd.systemd.enable = true;
 
   system.stateVersion = "24.11";  # match your installer version
 }

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="rose" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4A5A5"/>
+      <stop offset="100%" stop-color="#B06B72"/>
+    </linearGradient>
+  </defs>
+  <!-- Thin I-beam with heart -->
+  <line x1="16" y1="6" x2="16" y2="26" stroke="url(#rose)" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="13" y1="6" x2="19" y2="6" stroke="#C4838B" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="13" y1="26" x2="19" y2="26" stroke="#C4838B" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Tiny heart at center -->
+  <path d="M 16,15 C 15.3,14.3 14.3,14.6 15,15.5 L 16,16.5 L 17,15.5 C 17.7,14.6 16.7,14.3 16,15 Z"
+        fill="#C4838B"/>
+</svg>

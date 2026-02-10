@@ -1,5 +1,5 @@
 {
-  description = "Kat's NixOS — Hyprland + Noctalia + Stylix";
+  description = "Kat's NixOS — Hyprland + AGS + Stylix";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -14,20 +14,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ags = {
+      url = "github:aylur/ags";
+    };
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+    astal = {
+      url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     claude-code = {
       url = "github:sadjow/claude-code-nix";
-      
     };
-
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, noctalia, claude-code, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, ags, astal, claude-code, ... }@inputs:
   let
     system = "x86_64-linux";
   in {

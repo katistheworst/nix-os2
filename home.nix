@@ -10,7 +10,6 @@
   # ── Ghostty Terminal ──────────────────────────────────────────────
   programs.ghostty = {
     enable = true;
-    # Stylix will auto-theme Ghostty's colors. Add your own overrides:
     settings = {
       font-family = "JetBrainsMono Nerd Font";
       font-size = 13;
@@ -21,8 +20,8 @@
       cursor-style = "bar";
       cursor-style-blink = true;
       mouse-hide-while-typing = true;
-      background-opacity = 0.85;   # glass transparency 🪟
-      # minimum-contrast = 1.1;    # uncomment if text is hard to read
+      background-opacity = 0.6;
+      minimum-contrast = 1.1;
     };
   };
 
@@ -38,7 +37,7 @@
       cat = "bat";
       rebuild = "sudo nixos-rebuild switch --flake ~/nixos-config#tuf";
       update = "nix flake update --flake ~/nixos-config";
-      cc = "claude";  # Claude Code shortcut
+      cc = "claude";
     };
     initExtra = ''
       # 💸 Money affirmation on each new shell
@@ -58,21 +57,19 @@
   programs.starship = {
     enable = true;
     settings = {
-      # 🎀 Princess Bubblegum Rice Theme — powerline gradient
       format = ''
-        [](fg:#ff69b4)$os[](bg:#ff1493 fg:#ff69b4)$username[](bg:#c71585 fg:#ff1493)$directory[](bg:#9932cc fg:#c71585)$git_branch$git_status[](bg:#6a0dad fg:#9932cc)$python$conda[](fg:#6a0dad)$fill[](fg:#8b008b)$cmd_duration[](bg:#9400d3 fg:#8b008b)$battery[](bg:#ba55d3 fg:#9400d3)$time[ ](fg:#ba55d3)
+        [](fg:#C4838B)$os[](bg:#B06B72 fg:#C4838B)$username[](bg:#8B5E6B fg:#B06B72)$directory[](bg:#6B4F5A fg:#8B5E6B)$git_branch$git_status[](bg:#5A3F4E fg:#6B4F5A)$python$conda[](fg:#5A3F4E)$fill[](fg:#5A3F4E)$cmd_duration[](bg:#6B4F5A fg:#5A3F4E)$battery[](bg:#8B5E6B fg:#6B4F5A)$time[ ](fg:#8B5E6B)
         $character'';
       add_newline = true;
-
       fill.symbol = " ";
 
       character = {
-        success_symbol = "[❯](bold #d94fa0)";
-        error_symbol = "[❯](bold #ff6b9d)";
+        success_symbol = "[❯](bold #C4838B)";
+        error_symbol = "[❯](bold #D4A5A5)";
       };
 
       os = {
-        style = "bg:#ff69b4 fg:white bold";
+        style = "bg:#C4838B fg:#F5F0EB bold";
         disabled = false;
         format = "[ $symbol ]($style)";
       };
@@ -82,44 +79,44 @@
       };
 
       username = {
-        style_user = "bg:#ff1493 fg:white bold";
-        style_root = "bg:#ff1493 fg:red bold";
+        style_user = "bg:#B06B72 fg:#F5F0EB bold";
+        style_root = "bg:#B06B72 fg:red bold";
         format = "[ $user ]($style)";
         show_always = true;
       };
 
       directory = {
-        style = "bg:#c71585 fg:white bold";
+        style = "bg:#8B5E6B fg:#F5F0EB bold";
         format = "[ $path ]($style)";
         truncation_length = 5;
         truncation_symbol = "…/";
       };
 
       git_branch = {
-        style = "bg:#9932cc fg:white bold";
+        style = "bg:#6B4F5A fg:#F5F0EB bold";
         format = "[ $symbol$branch ]($style)";
         symbol = " ";
       };
       git_status = {
-        style = "bg:#9932cc fg:white bold";
+        style = "bg:#6B4F5A fg:#F5F0EB bold";
         format = "[$all_status$ahead_behind]($style)";
       };
 
       python = {
-        style = "bg:#6a0dad fg:white";
+        style = "bg:#5A3F4E fg:#F5F0EB";
         format = "[ $symbol$version ]($style)";
         symbol = " ";
       };
 
       cmd_duration = {
-        style = "bg:#8b008b fg:white";
+        style = "bg:#5A3F4E fg:#F5F0EB";
         format = "[ 󱎫 $duration ]($style)";
         min_time = 1000;
       };
 
       battery = {
         display = [
-          { threshold = 30; style = "bg:#9400d3 fg:red bold"; }
+          { threshold = 30; style = "bg:#6B4F5A fg:red bold"; }
         ];
         format = "[ $symbol$percentage ]($style)";
       };
@@ -129,7 +126,7 @@
 
       time = {
         disabled = false;
-        style = "bg:#ba55d3 fg:white bold";
+        style = "bg:#8B5E6B fg:#F5F0EB bold";
         format = "[ 🩷 $time ]($style)";
         time_format = "%H:%M";
       };
@@ -139,95 +136,92 @@
   # ── Git ───────────────────────────────────────────────────────────
   programs.git = {
     enable = true;
-    userName = "Kat";       # change to your git name
-    userEmail = "";          # add your email
+    userName = "Kat";
+    userEmail = "";
   };
 
-  # ── Zen Browser ────────────────────────────────────────────────────
-  # Zen is a Firefox fork — install via flatpak or from flake
-  # For now, keep firefox as fallback; install Zen manually after first boot:
-  #   flatpak install flathub app.zen_browser.zen
-  programs.firefox.enable = true;  # fallback until Zen is set up
+  # ── Firefox ───────────────────────────────────────────────────────
+  programs.firefox.enable = true;
+
+  # ── Eww Widgets ───────────────────────────────────────────────────
+  programs.eww = {
+    enable = true;
+    configDir = ./eww;
+  };
 
   # ── Hyprland ──────────────────────────────────────────────────────
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      # ── Monitor ─────────────────────────────────────────────────
       monitor = [ ",preferred,auto,1" ];
 
-      # ── General ─────────────────────────────────────────────────
       general = {
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        # Stylix handles colors, but you can override:
-        # "col.active_border" = "rgb(d94fa0) rgb(a86fbf) 45deg";
-        # "col.inactive_border" = "rgb(2d1f2e)";
+        "col.active_border" = "rgb(C4838B) rgb(B06B72) 45deg";
+        "col.inactive_border" = "rgb(2d1f2e)";
         layout = "dwindle";
       };
 
-      # ── Decoration (glass effect ✨) ─────────────────────────────
       decoration = {
         rounding = 12;
         active_opacity = 0.92;
-        inactive_opacity = 0.82;
+        inactive_opacity = 0.80;
         fullscreen_opacity = 1.0;
         blur = {
           enabled = true;
-          size = 8;
-          passes = 4;
+          size = 10;
+          passes = 5;
           new_optimizations = true;
-          ignore_opacity = true;   # blur works even with transparent windows
-          noise = 0.015;
+          ignore_opacity = true;
+          noise = 0.01;
           contrast = 1.0;
-          brightness = 0.95;
-          vibrancy = 0.2;
-          vibrancy_darkness = 0.3;
+          brightness = 0.9;
+          vibrancy = 0.3;
+          vibrancy_darkness = 0.4;
           popups = true;
         };
         shadow = {
           enabled = true;
-          range = 20;
+          range = 25;
           render_power = 3;
-          
         };
       };
 
-      # ── Window Rules (glass + blur) ─────────────────────────────
-      windowrulev2 = [
-        # Make terminal extra glassy
-        "opacity 0.88 0.78, class:^(com.mitchellh.ghostty)$"
-        # Cursor IDE — slightly glassy
+      windowrule = [
+        "opacity 0.65 0.55, class:^(com.mitchellh.ghostty)$"
         "opacity 0.92 0.85, class:^(cursor)$"
         "opacity 0.92 0.85, class:^(Cursor)$"
-        # Firefox stays opaque for readability
         "opacity 1.0 0.95, class:^(firefox)$"
         "opacity 1.0 0.95, class:^(zen-alpha)$"
       ];
 
-      # ── Layer Rules (blur Noctalia, notifications) ──────────────
       layerrule = [
         "blur, notifications"
         "blur, gtk-layer-shell"
+        "blur, bar-0"
+        "ignorealpha 0.3, bar-0"
+        "blur, launcher"
+        "blur, cheatsheet"
       ];
 
-      # ── Animations ──────────────────────────────────────────────
       animations = {
         enabled = true;
         bezier = [
           "ease, 0.25, 0.1, 0.25, 1"
           "snappy, 0.4, 0, 0.2, 1"
+          "smooth, 0.05, 0.9, 0.1, 1.05"
         ];
         animation = [
           "windows, 1, 5, snappy, slide"
           "windowsOut, 1, 5, snappy, slide"
           "fade, 1, 4, ease"
           "workspaces, 1, 4, snappy, slide"
+          "layers, 1, 3, smooth, fade"
         ];
       };
 
-      # ── Input ───────────────────────────────────────────────────
       input = {
         kb_layout = "us";
         follow_mouse = 1;
@@ -237,13 +231,11 @@
         sensitivity = 0;
       };
 
-      # ── Dwindle Layout ──────────────────────────────────────────
       dwindle = {
         pseudotile = true;
         preserve_split = true;
       };
 
-      # ── NVIDIA-specific ─────────────────────────────────────────
       env = [
         "LIBVA_DRIVER_NAME,nvidia"
         "XDG_SESSION_TYPE,wayland"
@@ -256,16 +248,13 @@
         no_hardware_cursors = true;
       };
 
-      # ── Autostart ───────────────────────────────────────────────
       exec-once = [
-        "noctalia-shell"   # start Noctalia desktop shell
-        "hypridle"         # auto-lock daemon
-        "wl-paste --watch cliphist store"  # clipboard history daemon
-        "wlsunset -l 34.0 -L -118.2"      # night light (Seattle coords)
-        # "eww open bar"   # uncomment when you have an Eww config
+        "ags run &"
+        "hypridle"
+        "wl-paste --watch cliphist store"
+        "wlsunset -l 34.0 -L -118.2"
       ];
 
-      # ── Keybinds ────────────────────────────────────────────────
       "$mod" = "SUPER";
 
       bind = [
@@ -274,19 +263,19 @@
         "$mod, E, exec, ghostty -e yazi"
         "$mod, B, exec, firefox"
         "$mod, C, exec, cursor"
+        "$mod, D, exec, ags toggle launcher"
+        "$mod, slash, exec, ags toggle cheatsheet"
+        "$mod, x, exec, ags toggle powermenu"
 
-        # Noctalia launcher (IPC call)
-        "$mod, D, exec, noctalia-shell ipc call launcher toggle"
-
-        # Screenshots (hyprshot)
+        # Screenshots
         "$mod, S, exec, hyprshot -m region"
         "$mod SHIFT, S, exec, hyprshot -m output"
         "$mod ALT, S, exec, hyprshot -m window"
 
-        # Lock screen
+        # Lock
         "$mod, escape, exec, hyprlock"
 
-        # Window management
+        # Windows
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
         "$mod, V, togglefloating"
@@ -320,7 +309,6 @@
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
 
-        # Move to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod SHIFT, 3, movetoworkspace, 3"
@@ -331,18 +319,15 @@
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
 
-        # Scroll through workspaces
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
       ];
 
-      # Mouse binds
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
 
-      # Volume & brightness (fn keys)
       bindel = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
@@ -356,7 +341,7 @@
     };
   };
 
-  # ── Hyprlock (lock screen) ──────────────────────────────────────
+  # ── Hyprlock ──────────────────────────────────────────────────────
   programs.hyprlock = {
     enable = true;
     settings = lib.mkForce {
@@ -380,9 +365,9 @@
         outline_thickness = 2;
         dots_size = 0.25;
         dots_spacing = 0.3;
-        outer_color = "rgb(d94fa0)";       # magenta border
-        inner_color = "rgb(1a1016)";       # dark bg
-        font_color = "rgb(f0d0e8)";        # pink white text
+        outer_color = "rgb(C4838B)";
+        inner_color = "rgb(1a1016)";
+        font_color = "rgb(F5F0EB)";
         fade_on_empty = true;
         placeholder_text = "<i>  Enter Password...</i>";
         hide_input = false;
@@ -393,35 +378,57 @@
 
       label = [
         {
-          # Time — big pixel clock
+          # Kangel icon
+          monitor = "";
+          text = "";
+          color = "rgb(C4838B)";
+          font_size = 1;
+          font_family = "Inter";
+          position = "0, 220";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          # Greeting
+          monitor = "";
+          text = "hi kat 🩷";
+          color = "rgb(B06B72)";
+          font_size = 18;
+          font_family = "Inter";
+          position = "0, 180";
+          halign = "center";
+          valign = "center";
+        }
+        {
+          # Time
           monitor = "";
           text = "$TIME";
-          color = "rgb(e060b0)";           # bubblegum pink
+          color = "rgb(C4838B)";
           font_size = 96;
           font_family = "Inter";
-          position = "0, 120";
+          position = "0, 100";
           halign = "center";
           valign = "center";
         }
         {
           # Date
           monitor = "";
-          text = "cmd[update:3600000] date '+%A, %B %d'";
-          color = "rgb(c77dba)";           # orchid
+          text = "cmd[update:3600000] date "+%A, %B %d"";
+          color = "rgb(B06B72)";
           font_size = 22;
           font_family = "Inter";
-          position = "0, 50";
+          position = "0, 30";
           halign = "center";
           valign = "center";
         }
         {
-          # Rotating Money Affirmations 💸
+          # Affirmation
           monitor = "";
-          text = ''cmd[update:30000] shuf -n1 ~/.config/hypr/affirmations.txt'';
-          color = "rgb(a86fbf)";           # lavender
+          text = "cmd[update:30000] shuf -n1 ~/.config/hypr/affirmations.txt";
+          color = "rgb(D4A5A5)";
           font_size = 16;
           font_family = "Inter";
-          position = "0, -140";
+          position = "0, -150";
           halign = "center";
           valign = "center";
         }
@@ -429,7 +436,7 @@
     };
   };
 
-  # ── Hypridle (auto-lock) ──────────────────────────────────────────
+  # ── Hypridle ──────────────────────────────────────────────────────
   services.hypridle = {
     enable = true;
     settings = {
@@ -441,18 +448,15 @@
 
       listener = [
         {
-          # Dim screen after 5 min
           timeout = 300;
           on-timeout = "brightnessctl -s set 10";
           on-resume = "brightnessctl -r";
         }
         {
-          # Lock after 10 min
           timeout = 600;
           on-timeout = "loginctl lock-session";
         }
         {
-          # Screen off after 15 min
           timeout = 900;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
@@ -461,49 +465,53 @@
     };
   };
 
-  # ── Yazi (terminal file manager) ──────────────────────────────────
+  # ── Yazi ──────────────────────────────────────────────────────────
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
   };
-  programs.eww = {
-    enable = true;
-    configDir = ./eww;  # create this folder with your eww config later
-  };
 
-  # ── Packages (user-level) ─────────────────────────────────────────
+  # ── Packages ──────────────────────────────────────────────────────
   home.packages = with pkgs; [
+    # AGS
+    ags
+    dart-sass
+
     # Dev tools
     neovim
     lazygit
     fzf
-    eza       # modern ls
-    bat       # modern cat
+    eza
+    bat
     jq
-    nodejs    # needed for Claude Code and OpenClaw
+    nodejs
 
     # Screenshots
     hyprshot
 
-    # fGalaxy (directory constellation visualizer)
-    # Install manually: curl -sSL https://raw.githubusercontent.com/xoodymoon/fgalaxy/main/install.sh | bash
+    # Python
     python3
     python3Packages.numpy
 
-    # Fonts (extra — Stylix handles main fonts via configuration.nix)
-    #nerd-fonts.jetbrains-mono  # handled by stylix
-    noto-fonts-color-emoji  # emoji support 🩷
-    # Pixelify Sans is packaged as a custom derivation in configuration.nix
+    # Fonts
+    noto-fonts-color-emoji
 
     # Fun
-    cava      # audio visualizer
-    pipes-rs  # terminal screensaver
+    cava
+    pipes-rs
   ];
 
   # ── XDG ───────────────────────────────────────────────────────────
   xdg.enable = true;
+n  # ── Cursor Theme ─────────────────────────────────────────────────
+  home.pointerCursor = {
+    name = "RoseHeartCursor";
+    package = pkgs.callPackage ./cursors {};
+    size = 24;
+    gtk.enable = true;
+  };
 
-  # ── Affirmations file (used by Hyprlock greeting + zsh) ───────────
+  # ── Affirmations ──────────────────────────────────────────────────
   home.file.".config/hypr/affirmations.txt".text = ''
     I deserve to receive large sums of money 💰
     My voice is a powerful tool that conveys confidence, value, and conviction
@@ -524,10 +532,7 @@
     I am a magnet for wealth and prosperity
   '';
 
-  # ── NSO Desktop Icons (Needy Streamer Overload) ─────────────────
-  # Fetched from: github.com/lezzthanthree/Needy-Streamer-Overload
-  # Use these as custom desktop/launcher icons in Noctalia or Eww
-  # Path: ~/.local/share/icons/nso/
+  # ── NSO Icons ─────────────────────────────────────────────────────
   home.file.".local/share/icons/nso" = {
     source = ./icons/nso;
     recursive = true;
