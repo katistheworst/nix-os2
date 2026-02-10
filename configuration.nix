@@ -1,29 +1,5 @@
 { config, pkgs, inputs, lib, ... }:
 
-let
-  # Pixelify Sans — kawaii pixel font from Google Fonts
-  # If the hash is wrong on first build, Nix will tell you the correct one.
-  # Just replace it with the hash from the error message.
-  pixelify-sans = pkgs.stdenvNoCC.mkDerivation {
-    pname = "pixelify-sans";
-    version = "1.003";
-    src = pkgs.fetchzip {
-      # Use the GitHub release — Google Fonts download URLs don't work with Nix fetchers
-      url = "https://github.com/googlefonts/pixelify-sans/releases/download/v1.003/PixelifySans-v1.003.zip";
-      hash = "sha256-0000000000000000000000000000000000000000000=";  # Nix will show the correct hash on first build — paste it here
-      stripRoot = false;
-    };
-    installPhase = ''
-      mkdir -p $out/share/fonts/truetype
-      find $src -name '*.ttf' -exec cp {} $out/share/fonts/truetype/ \;
-    '';
-    meta = {
-      description = "Pixelify Sans — pixel display font from Google Fonts";
-      license = lib.licenses.ofl;
-    };
-  };
-in
-
 {
   # ── Boot ──────────────────────────────────────────────────────────
   boot.loader.systemd-boot.enable = true;
@@ -78,6 +54,9 @@ in
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  # ── SSH ───────────────────────────────────────────────────────────
+  services.openssh.enable = true;
+
   # ── Display Manager ───────────────────────────────────────────────
   # greetd is lightweight and works well with Hyprland
   services.greetd = {
@@ -101,12 +80,12 @@ in
 
     fonts = {
       monospace = {
-        package = pkgs.maple-mono.NF;
-        name = "Maple Mono NF";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
       };
       sansSerif = {
-        package = pixelify-sans;
-        name = "Pixelify Sans";
+        package = pkgs.inter;
+        name = "Inter";
       };
       serif = {
         package = pkgs.noto-fonts;
@@ -137,7 +116,6 @@ in
     xdg-desktop-portal-hyprland
 
     # AI IDE
-    code-cursor
 
     # Screenshots
     grim

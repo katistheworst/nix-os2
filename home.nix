@@ -12,7 +12,7 @@
     enable = true;
     # Stylix will auto-theme Ghostty's colors. Add your own overrides:
     settings = {
-      font-family = "Maple Mono NF";
+      font-family = "JetBrainsMono Nerd Font";
       font-size = 13;
       window-padding-x = 12;
       window-padding-y = 12;
@@ -190,7 +190,7 @@
           enabled = true;
           range = 20;
           render_power = 3;
-          color = "rgba(1a101660)";
+          
         };
       };
 
@@ -261,7 +261,7 @@
         "noctalia-shell"   # start Noctalia desktop shell
         "hypridle"         # auto-lock daemon
         "wl-paste --watch cliphist store"  # clipboard history daemon
-        "wlsunset -l 47.6 -L -122.3"      # night light (Seattle coords)
+        "wlsunset -l 34.0 -L -118.2"      # night light (Seattle coords)
         # "eww open bar"   # uncomment when you have an Eww config
       ];
 
@@ -398,7 +398,7 @@
           text = "$TIME";
           color = "rgb(e060b0)";           # bubblegum pink
           font_size = 96;
-          font_family = "Pixelify Sans";
+          font_family = "Inter";
           position = "0, 120";
           halign = "center";
           valign = "center";
@@ -409,7 +409,7 @@
           text = "cmd[update:3600000] date '+%A, %B %d'";
           color = "rgb(c77dba)";           # orchid
           font_size = 22;
-          font_family = "Pixelify Sans";
+          font_family = "Inter";
           position = "0, 50";
           halign = "center";
           valign = "center";
@@ -420,7 +420,7 @@
           text = ''cmd[update:30000] shuf -n1 ~/.config/hypr/affirmations.txt'';
           color = "rgb(a86fbf)";           # lavender
           font_size = 16;
-          font_family = "Pixelify Sans";
+          font_family = "Inter";
           position = "0, -140";
           halign = "center";
           valign = "center";
@@ -481,7 +481,6 @@
     bat       # modern cat
     jq
     nodejs    # needed for Claude Code and OpenClaw
-    claude-code  # Anthropic's agentic coding CLI
 
     # Screenshots
     hyprshot
@@ -492,7 +491,7 @@
     python3Packages.numpy
 
     # Fonts (extra — Stylix handles main fonts via configuration.nix)
-    maple-mono.NF           # terminal/code font (Nerd Font glyphs)
+    #nerd-fonts.jetbrains-mono  # handled by stylix
     noto-fonts-color-emoji  # emoji support 🩷
     # Pixelify Sans is packaged as a custom derivation in configuration.nix
 

@@ -14,28 +14,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
     };
 
     claude-code = {
       url = "github:sadjow/claude-code-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      
     };
 
-    nix-openclaw = {
-      url = "github:openclaw/nix-openclaw";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, noctalia, claude-code, nix-openclaw, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, noctalia, claude-code, ... }@inputs:
   let
     system = "x86_64-linux";
   in {
