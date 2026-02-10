@@ -359,13 +359,13 @@
   # ── Hyprlock (lock screen) ──────────────────────────────────────
   programs.hyprlock = {
     enable = true;
-    settings = {
+    settings = lib.mkForce {
       general = {
         hide_cursor = true;
         grace = 5;
       };
 
-      background = lib.mkForce [{
+      background = [{
         monitor = "";
         path = "screenshot";
         blur_passes = 4;
