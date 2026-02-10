@@ -16,10 +16,6 @@
 
     ags = {
       url = "github:aylur/ags";
-    };
-
-    astal = {
-      url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -28,7 +24,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ags, astal, claude-code, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, ags, claude-code, ... }@inputs:
   let
     system = "x86_64-linux";
   in {

@@ -7,6 +7,21 @@
 
   programs.home-manager.enable = true;
 
+  # ── AGS (Aylur's GTK Shell) ──────────────────────────────────────
+  imports = [ inputs.ags.homeManagerModules.default ];
+
+  programs.ags = {
+    enable = true;
+    # configDir managed manually in ~/.config/ags
+    extraPackages = [
+      inputs.ags.packages.x86_64-linux.hyprland
+      inputs.ags.packages.x86_64-linux.battery
+      inputs.ags.packages.x86_64-linux.wireplumber
+      inputs.ags.packages.x86_64-linux.network
+      inputs.ags.packages.x86_64-linux.apps
+    ];
+  };
+
   # ── Ghostty Terminal ──────────────────────────────────────────────
   programs.ghostty = {
     enable = true;
@@ -159,8 +174,8 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgb(C4838B) rgb(B06B72) 45deg";
-        "col.inactive_border" = "rgb(2d1f2e)";
+        "col.active_border" = lib.mkForce "rgb(C4838B) rgb(B06B72) 45deg";
+        "col.inactive_border" = lib.mkForce "rgb(2d1f2e)";
         layout = "dwindle";
       };
 
@@ -189,22 +204,10 @@
         };
       };
 
-      windowrule = [
-        "opacity 0.65 0.55, class:^(com.mitchellh.ghostty)$"
-        "opacity 0.92 0.85, class:^(cursor)$"
-        "opacity 0.92 0.85, class:^(Cursor)$"
-        "opacity 1.0 0.95, class:^(firefox)$"
-        "opacity 1.0 0.95, class:^(zen-alpha)$"
-      ];
+      # windowrules moved to extraConfig for 0.53 compat
 
-      layerrule = [
-        "blur, notifications"
-        "blur, gtk-layer-shell"
-        "blur, bar-0"
-        "ignorealpha 0.3, bar-0"
-        "blur, launcher"
-        "blur, cheatsheet"
-      ];
+      # layerrules disabled — Hyprland 0.53 syntax issue
+      # Re-enable when AGS layers are running
 
       animations = {
         enabled = true;
@@ -266,6 +269,7 @@
         "$mod, D, exec, ags toggle launcher"
         "$mod, slash, exec, ags toggle cheatsheet"
         "$mod, x, exec, ags toggle powermenu"
+        " SHIFT, V, exec, cliphist list | rofi -dmenu -p clipboard | cliphist decode | wl-copy"
 
         # Screenshots
         "$mod, S, exec, hyprshot -m region"
@@ -413,7 +417,7 @@
         {
           # Date
           monitor = "";
-          text = "cmd[update:3600000] date "+%A, %B %d"";
+          text = ''cmd[update:3600000] date '+%A, %B %d' '';
           color = "rgb(B06B72)";
           font_size = 22;
           font_family = "Inter";
@@ -473,9 +477,7 @@
 
   # ── Packages ──────────────────────────────────────────────────────
   home.packages = with pkgs; [
-    # AGS
-    ags
-    dart-sass
+    rofi
 
     # Dev tools
     neovim
@@ -503,11 +505,11 @@
 
   # ── XDG ───────────────────────────────────────────────────────────
   xdg.enable = true;
-n  # ── Cursor Theme ─────────────────────────────────────────────────
+  # ── Cursor Theme ─────────────────────────────────────────────────
   home.pointerCursor = {
-    name = "RoseHeartCursor";
-    package = pkgs.callPackage ./cursors {};
-    size = 24;
+    name = lib.mkForce "RoseHeartCursor";
+    package = lib.mkForce (pkgs.callPackage ./cursors {});
+    size = lib.mkForce 24;
     gtk.enable = true;
   };
 

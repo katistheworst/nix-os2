@@ -172,7 +172,7 @@
   # ── Plymouth (boot splash) ──────────────────────────────────────
   boot.plymouth = {
     enable = true;
-    theme = "bgrt";
+    theme = lib.mkForce "bgrt";
   };
   boot.initrd.systemd.enable = true;
 

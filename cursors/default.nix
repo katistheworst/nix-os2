@@ -1,4 +1,4 @@
-{ stdenv, librsvg, xorg }:
+{ stdenv, librsvg, xcursorgen }:
 
 stdenv.mkDerivation {
   pname = "rose-heart-cursor";
@@ -6,7 +6,7 @@ stdenv.mkDerivation {
 
   src = ./.;
 
-  nativeBuildInputs = [ librsvg xorg.xcursorgen ];
+  nativeBuildInputs = [ librsvg xcursorgen ];
 
   buildPhase = ''
     export out=$out
