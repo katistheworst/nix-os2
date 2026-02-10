@@ -365,7 +365,7 @@
         grace = 5;
       };
 
-      background = [{
+      background = lib.mkForce [{
         monitor = "";
         path = "screenshot";
         blur_passes = 4;
