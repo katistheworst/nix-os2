@@ -1,0 +1,28 @@
+; ── Kat's Eww Widgets ─────────────────────────────────────────────
+; This is a starter config. Customize to your heart's content!
+; Noctalia handles bar/launcher/notifications, so use Eww for
+; extra custom widgets (system monitors, music, clock overlay, etc.)
+
+; Example: a floating system info widget
+(defpoll time :interval "1s"
+  `date '+%H:%M'`)
+
+(defpoll date :interval "60s"
+  `date '+%A, %B %d'`)
+
+(defwidget clock []
+  (box :class "clock-box"
+       :orientation "v"
+       :space-evenly false
+    (label :class "clock-time" :text time)
+    (label :class "clock-date" :text date)))
+
+(defwindow clock-overlay
+  :monitor 0
+  :geometry (geometry
+    :x "20px"
+    :y "20px"
+    :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false
+  (clock))

@@ -8,9 +8,9 @@ let
     pname = "pixelify-sans";
     version = "1.003";
     src = pkgs.fetchzip {
-      url = "https://fonts.google.com/download?family=Pixelify+Sans";
-      extension = "zip";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";  # replace on first build!
+      # Use the GitHub release — Google Fonts download URLs don't work with Nix fetchers
+      url = "https://github.com/googlefonts/pixelify-sans/releases/download/v1.003/PixelifySans-v1.003.zip";
+      hash = "sha256-0000000000000000000000000000000000000000000=";  # Nix will show the correct hash on first build — paste it here
       stripRoot = false;
     };
     installPhase = ''
@@ -91,39 +91,13 @@ in
   };
 
   # ── Stylix (system-wide theming) ──────────────────────────────────
-  # Princess Bubblegum inspired pink/magenta/purple palette
+  # Palette auto-generated from wallpaper — picks up the pinks,
+  # blush, cream, and warm tones from the LaserAway illustration
   stylix = {
     enable = true;
-    # LaserAway illustration wallpaper (upscaled 4x)
     image = ./wallpaper.png;
-    # Keep the custom PB palette instead of auto-generating from wallpaper:
-    base16Scheme = {
-      base00 = "1a1016";  # background - deep plum black
-      base01 = "2d1f2e";  # lighter bg
-      base02 = "3d2b3f";  # selection
-      base03 = "6b4f6e";  # comments
-      base04 = "c299b5";  # dark fg
-      base05 = "f0d0e8";  # foreground - soft pink white
-      base06 = "f8e0f0";  # light fg
-      base07 = "fff0fa";  # lightest fg
-      base08 = "ff6b9d";  # red/error - hot pink
-      base09 = "ff8cc6";  # orange - rose
-      base0A = "ffb3d9";  # yellow - light pink
-      base0B = "c77dba";  # green - orchid purple
-      base0C = "a86fbf";  # cyan - lavender
-      base0D = "d94fa0";  # blue - magenta
-      base0E = "e060b0";  # purple - bubblegum pink
-      base0F = "8b5e83";  # brown - muted plum
-    };
-
-    # If you have a wallpaper, uncomment and set the path:
-    image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/master/wallpapers/nix-wallpaper-simple-dark-gray.png";
-      sha256 = "1mcr2d1r67i8bch3npwfd3jb4ildi68wnz7yjpjkn7faa2gng3v8";
-    };
-    # Replace with your own wallpaper later ^^
-
-    polarity = "dark";
+    # Let Stylix derive colors from the wallpaper automatically
+    polarity = "light";
 
     fonts = {
       monospace = {

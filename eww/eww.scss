@@ -1,0 +1,31 @@
+// ── Princess Bubblegum Palette ──────────────────────────────────
+$bg:       #1a1016;
+$bg-light: #2d1f2e;
+$fg:       #f0d0e8;
+$pink:     #d94fa0;
+$hot-pink: #ff6b9d;
+$magenta:  #e060b0;
+$orchid:   #c77dba;
+$lavender: #a86fbf;
+$plum:     #8b5e83;
+
+// ── Clock Widget ───────────────────────────────────────────────
+.clock-box {
+  background-color: rgba($bg, 0.85);
+  border: 2px solid $pink;
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+
+.clock-time {
+  color: $magenta;
+  font-size: 48px;
+  font-weight: bold;
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+.clock-date {
+  color: $orchid;
+  font-size: 14px;
+  font-family: "Inter";
+}
